@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: pocket-wallet
+  datasource:
+    # 本機 MySQL 連線。請先建立資料庫，步驟見根目錄 README.md。
+    # 主機：localhost
+    # 埠號：3306
+    # 資料庫名稱：pocket_wallet
+    # 帳號：{DB_USERNAME}（將帳號放到.env）
+    # 密碼：{DB_PASSWORD}（將密碼放到.env）
+    url: jdbc:mysql://localhost:3306/pocket_wallet?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Taipei&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      # update：開發時依照 Entity 自動建立或更新 expenses 資料表。
+      # 正式環境建議改成 validate，並另外管理資料庫結構。
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: Asia/Taipei
